@@ -14,6 +14,7 @@ const Navbar = () => {
   const contactRef = useRef(null);
   const toplineRef = useRef(null);
   const botlineRef = useRef(null);
+  const burgerRef = useRef(null);
 
   const tl = useRef(null);
   const iconTl = useRef(null);
@@ -22,13 +23,13 @@ const Navbar = () => {
   const [showBurger, setShowBurger] = useState(true)
 
 
-
   useGSAP(() => {
     gsap.set(navRef.current, { xPercent: 100 });
     gsap.set([linksRef.current, contactRef.current], {
       autoAlpha: 0,
       x: -20,
     });
+
 
     tl.current = gsap
       .timeline({ paused: true })
@@ -57,7 +58,8 @@ const Navbar = () => {
           ease: "power2.out",
         },
         "<+0.2"
-      );
+      )
+      
     iconTl.current = gsap
       .timeline({ paused: true }).to(toplineRef.current, {
         rotate: 45,
@@ -111,7 +113,7 @@ const Navbar = () => {
           {["Home", "Services", "About", "Work", "Contact"].map(
             (section, index) => (
               <div key={index} ref={(el) => (linksRef.current[index] = el)}>
-               <Link
+                <Link
                   className="transition-all duration-300 cursor-pointer hover:text-white"
                   to={`${section}`}
                   smooth
@@ -145,7 +147,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all 
+      <div ref={burgerRef} className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all 
       duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
         onClick={toggleMenu}
         style={{
