@@ -1,5 +1,7 @@
-import Navbar from './Sections/Navbar'
-import Hero from './Sections/Hero';
+import Navbar from './sgit add src/App.jsx
+git commit -m "Fix sections folder casing"
+git pushections/Navbar'
+import Hero from './sections/Hero';
 
 const App = () => {
   return (
