@@ -12,6 +12,7 @@ const Hero = () => {
     const isMobile = useMediaQuery({ maxWidth: 853 })
     const contextRef = useRef(null);
     const headerRef = useRef(null);
+    const resumeRef = useRef(null);
     const aboutText = `I'm Somewhat of a 
                      WebDev Myself`
 
@@ -28,7 +29,12 @@ const Hero = () => {
             y: 200,
             duration: 1,
             ease: "circ.out"
-        }, "<+0.2")
+        }, "<+0.2");
+        tl.from(resumeRef.current,{
+            opacity:0,
+            duration:1.5,
+            ease:'power1.inOut'
+        },'<+1.5');
     }, [])
 
     return (
@@ -52,7 +58,15 @@ const Hero = () => {
                         <AnimatedTextLine
                             text={aboutText}
                             className="font-light uppercase value-text-responsive" />
-
+                        <a
+                            ref={resumeRef}
+                            href="/resume.pdf"
+                            download="Vibhudendra_Resume.pdf"
+                            className="relative cursor-pointer group inline-flex items-center gap-2"
+                        >
+                            Resume
+                            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -69,7 +83,7 @@ const Hero = () => {
                 >
                     <ambientLight intensity={0.5} />
                     <Float speed={1}>
-                        <Planet scale={isMobile ? 0.5 : 1}/>
+                        <Planet scale={isMobile ? 0.5 : 1.1} />
                     </Float>
                     <Environment resolution={256}>
                         <group rotation={[-Math.PI / 3, 4, 1]}>
