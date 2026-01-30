@@ -19,7 +19,7 @@ const Hero = () => {
                 sub="200 Portfolio Found"
                 aboutText={`I'm Somewhat of a 
 developer myself`}
-                linkText="Resume"
+                // linkText="Resume"
             />
             <figure
                 className="absolute inset-0 -z-50"

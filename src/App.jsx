@@ -3,6 +3,7 @@ import Hero from './sections/Hero';
 import Service from './sections/Service';
 import ServicesDetail from './sections/ServicesDetail';
 import ReactLenis from 'lenis/react';
+import About from './sections/About';
 
 const App = () => {
   return (
@@ -11,10 +12,7 @@ const App = () => {
       <Hero />
       <Service />
       <ServicesDetail />
-      {/* <section className='min-h-screen'></section>
-      <section className='min-h-screen'></section>
-      <section className='min-h-screen'></section>
-      <section className='min-h-screen'></section> */}
+      <About />
     </ReactLenis>
   )
 }

@@ -64,7 +64,7 @@ const AnimatedHeader = ({ title, sub, aboutText, linkText, textColor, withScroll
                         ref={resumeRef}
                         href="/resume.pdf"
                         download="Vibhudendra_Resume.pdf"
-                        className="relative cursor-pointer group inline-flex items-center gap-2"
+                        className={`relative cursor-pointer group inline-flex items-center gap-2 ${textColor}`}
                     >
                         {linkText}
                         <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full"></span>
