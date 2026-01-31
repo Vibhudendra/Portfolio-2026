@@ -1,0 +1,193 @@
+import { projects } from "../constants/index";
+
+import AnimatedHeader from "../components/AnimatedHeader";
+import { Icon } from "@iconify/react";
+import { useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+const Works = () => {
+  const previewRef = useRef(null);
+  const mouse = useRef({ x: 0, y: 0 });
+  const moveX = useRef(null);
+  const moveY = useRef(null);
+  const overlayRef = useRef([]);
+
+  const [currentIndex, setCurrentIndex] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    if (window.innerWidth < 768) return;
+    setCurrentIndex(index);
+
+    const el = overlayRef.current[index];
+    if (!el) return;
+
+    gsap.killTweensOf(el);
+    gsap.fromTo(
+      el,
+      {
+        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+      },
+      {
+        clipPath: "polygon(0 100%, 100% 100%, 100% 0, 0 0)",
+        duration: 0.15,
+        ease: "power2.out",
+      }
+    );
+
+    gsap.to(previewRef.current, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = (index) => {
+    if (window.innerWidth < 768) return;
+    setCurrentIndex(null);
+
+    const el = overlayRef.current[index];
+    if (!el) return;
+
+    gsap.killTweensOf(el);
+    gsap.to(el, {
+      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+      duration: 0.2,
+      ease: "power2.out",
+    });
+
+    gsap.to(previewRef.current, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
+    gsap.to(previewRef.current, {
+      opacity: 0,
+      scale: 0,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (window.innerWidth < 768) return;
+    mouse.current.x = e.clientX + 24;
+    mouse.current.y = e.clientY + 24;
+    moveX.current(mouse.current.x);
+    moveY.current(mouse.current.y);
+  };
+
+  const text = `A small selection of work built under real 
+  constraints — clarity, trade-offs, and reliability..`;
+
+  useGSAP(() => {
+    moveX.current = gsap.quickTo(previewRef.current, "x", {
+      duration: 1.5,
+      ease: "power3.out",
+    });
+    moveY.current = gsap.quickTo(previewRef.current, "y", {
+      duration: 2,
+      ease: "power3.out",
+    });
+    gsap.from("#project",{
+      y:100,
+      opacity:0,
+      duration:1.3,
+      stagger:0.4,
+      ease:"back.out",
+      scrollTrigger:{
+        trigger:"#project"
+      }
+    })
+  });
+
+  return (
+    <section id="Work" className="flex flex-col min-h-screen">
+      <AnimatedHeader
+        title={"Works"}
+        sub={"AESTHETICS MATTER. DON’T YOU THINK?"}
+        aboutText={text}
+        textColor={""}
+        withScrollTrigger={true}
+      />
+
+      <div
+        className="relative flex flex-col font-light"
+        onMouseMove={handleMouseMove}
+      >
+        {projects.map((project, index) => (
+          <div
+            className="relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0"
+            key={project.id}
+            id="project"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <div
+              ref={(el) => {
+                overlayRef.current[index] = el;
+              }}
+              className="absolute inset-0 hidden md:block duration-200 bg-black -z-10 clip-path"
+            />
+            {/* Title */}
+            <div className="flex justify-between px-10 text-black transition-all duration-100 md:group-hover:px-12 md:group-hover:text-white">
+              <h2 className="lg:text-[32px] text-[26px] leading-none">
+                {project.name}
+              </h2>
+              <Icon
+                icon="solar:arrow-right-up-linear"
+                className="md:size-6 size-5"
+              />
+            </div>
+            {/* divider */}
+            <div className="w-full h-0.5 bg-black/80" />
+            {/* framework */}
+            <div className="flex px-10 text-xs leading-loose uppercase transition-all duration-500 md:text-xs gap-x-5 md:group-hover:px-12">
+              {project.frameworks.map((framework) => (
+                <p
+                  className="text-black transition-colors duration-500 md:group-hover:text-white"
+                  key={framework.id}
+                >
+                  {framework.name}
+                </p>
+              ))}
+            </div>
+            {/* mobile-preview */}
+            <div className="relative flex items-center justify-center px-10 md:hidden h-100">
+              <img
+                src={project.bgImage}
+                alt={`${project.name}-bg-image`}
+                className="object-cover w-full h-full rounded-md brightness-50"
+              />
+              <img
+                src={project.image}
+                alt={`${project.name}-image`}
+                className="absolute bg-center px-14 rounded-xl"
+              />
+              {project.Link}
+            </div>
+          </div>
+        ))}
+
+        {/* desktop-view-project */}
+        <div
+          ref={previewRef}
+          className="fixed -top-2/6 left-0 z-50 overflow-hidden border-5 border-black pointer-events-none w-160 md:block hidden opacity-0 rounded-xl"
+        >
+          {currentIndex !== null && (
+            <img
+              src={projects[currentIndex].image}
+              alt="preview"
+              className="object-cover w-full h-full"
+            />
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Works;

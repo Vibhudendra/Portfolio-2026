@@ -1,11 +1,7 @@
-import { useRef } from "react"
-import AnimatedHeader from "../components/AnimatedHeader"
-import AnimatedTextLine from "../components/AnimatedTextLine";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import React from 'react'
 
-const About = () => {
-    const imgRef = useRef(null);
+const AboutExp = () => {
+  const imgRef = useRef(null);
     const resumeRef = useRef(null);
     const text = `Mostly harmless.
     Occasionally useful`
@@ -41,9 +37,9 @@ const About = () => {
     });
 
     return (
-        <section id="About" className="bg-black rounded-b-2xl">
+        <section id="About" className="min-h-screen bg-black rounded-b-2xl">
             <AnimatedHeader
-                title={"WhoAmI?"}
+                title={"Who Am I?"}
                 sub={"Let's See"}
                 aboutText={text}
                 textColor={"text-white"}
@@ -54,7 +50,7 @@ const About = () => {
                     ref={imgRef}
                     src="images/MAN2.png"
                     alt="man"
-                    className="w-md rounded-2xl opacity-70 blur-[0.3px]"
+                    className="w-md rounded-2xl"
                 />
 
                 <div className="flex flex-col gap-4 w-full lg:w-1/2">
@@ -77,4 +73,4 @@ const About = () => {
     )
 }
 
-export default About
+export default AboutExp
