@@ -32,7 +32,7 @@ const Works = () => {
         clipPath: "polygon(0 100%, 100% 100%, 100% 0, 0 0)",
         duration: 0.15,
         ease: "power2.out",
-      }
+      },
     );
 
     gsap.to(previewRef.current, {
@@ -92,16 +92,16 @@ const Works = () => {
       duration: 2,
       ease: "power3.out",
     });
-    gsap.from("#project",{
-      y:100,
-      opacity:0,
-      duration:1.3,
-      stagger:0.4,
-      ease:"back.out",
-      scrollTrigger:{
-        trigger:"#project"
-      }
-    })
+    gsap.from("#project", {
+      y: 100,
+      opacity: 0,
+      duration: 1.3,
+      stagger: 0.4,
+      ease: "back.out",
+      scrollTrigger: {
+        trigger: "#project",
+      },
+    });
   });
 
   return (
@@ -167,7 +167,6 @@ const Works = () => {
                 alt={`${project.name}-image`}
                 className="absolute bg-center px-14 rounded-xl"
               />
-              {project.Link}
             </div>
           </div>
         ))}

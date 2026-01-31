@@ -4,7 +4,7 @@ import Service from './sections/Service';
 import ServicesDetail from './sections/ServicesDetail';
 import ReactLenis from 'lenis/react';
 import About from './sections/About';
-import Works from './constants/Works';
+import Works from './sections/Works';
 
 const App = () => {
   return (
