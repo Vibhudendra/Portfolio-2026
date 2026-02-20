@@ -169,4 +169,5 @@ export const projects = [
 export const socials = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/vibhudendras" },
   { name: "GitHub", href: "https://github.com/Vibhudendra" },
+  { name: "Instagram", href: "https://www.instagram.com/__skybreaker"}
 ];
